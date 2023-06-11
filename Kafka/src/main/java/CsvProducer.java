@@ -13,7 +13,7 @@ public class CsvProducer {
         String bootstrapServers = "localhost:9092";
 
         // Kafka topic configuration
-        String topicName = "test-topic";
+        String topicName = "my_topic";
 
         // CSV file path in the user's home directory
         String csvFilePath = "/home/user/kafka/Kafka/datashet.csv";

@@ -14,7 +14,7 @@ public class SimpleConsumer {
         String bootstrapServers = "localhost:9092";
 
         // Kafka topic configuration
-        String topicName = "test-topic";
+        String topicName = "my_topic";
 
         // Create Kafka consumer configuration
         Properties config = new Properties();
@@ -38,16 +38,12 @@ public class SimpleConsumer {
             // Poll for records
             int messageCount = 0;
             boolean firstMessageSkipped = false;
-            while (messageCount < 9) {
+            while (messageCount < 675773) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                 for (var record : records) {
                     String message = record.value();
                     System.out.println(message);
 
-                    if (!firstMessageSkipped) {
-                        firstMessageSkipped = true;
-                        continue; // Skip the first message
-                    }
 
                     // Split the message by commas
                     String[] tokens = message.split(",");

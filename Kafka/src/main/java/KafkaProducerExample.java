@@ -3,7 +3,7 @@ import org.apache.kafka.clients.producer.*;
 import java.util.Properties;
 
 public class KafkaProducerExample {
-    private static final String TOPIC = "my-topic";
+    private static final String TOPIC = "my_topic";
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
 
     public static void main(String[] args) {
