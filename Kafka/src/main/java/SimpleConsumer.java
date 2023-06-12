@@ -38,7 +38,7 @@ public class SimpleConsumer {
             // Poll for records
             int messageCount = 0;
             boolean firstMessageSkipped = false;
-            while (messageCount < 675773) {
+            while (messageCount < 675774) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                 for (var record : records) {
                     String message = record.value();
@@ -63,13 +63,16 @@ public class SimpleConsumer {
                     messageCount++;
                 }
             }
+            System.out.println("Total messages received:" + messageCount);
 
             // Print the quadrant counts
             System.out.println("Quadrant Counts:");
-            System.out.println("Quadrant 0: " + quadrantCounts[0]);
-            System.out.println("Quadrant 1: " + quadrantCounts[1]);
-            System.out.println("Quadrant 2: " + quadrantCounts[2]);
-            System.out.println("Quadrant 3: " + quadrantCounts[3]);
+            System.out.println("Quadrant 1: " + quadrantCounts[0]);
+            System.out.println("Quadrant 2: " + quadrantCounts[1]);
+            System.out.println("Quadrant 3: " + quadrantCounts[2]);
+            System.out.println("Quadrant 4: " + quadrantCounts[3]);
+            int total = quadrantCounts[0] + quadrantCounts[1]+ quadrantCounts[2]+ quadrantCounts[3];
+            System.out.println("Total: " + total);
         } catch (Exception e) {
             e.printStackTrace();
         }

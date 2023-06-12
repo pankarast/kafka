@@ -20,6 +20,7 @@ public class KafkaBrokerExample {
         startKafkaBroker(2, 9094, "/tmp/kafka-logs-2");
 
         createTopic("my_topic", 2, 3);
+        createTopic("quadrant-counts", 2, 3);
 
         // Keep the program running until interrupted
         Thread.sleep(Long.MAX_VALUE);
