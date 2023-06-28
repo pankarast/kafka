@@ -19,8 +19,10 @@ public class KafkaBrokerExample {
         startKafkaBroker(1, 9093, "/tmp/kafka-logs-1");
         startKafkaBroker(2, 9094, "/tmp/kafka-logs-2");
 
-        createTopic("my_topic", 2, 3);
-        createTopic("quadrant-counts", 2, 3);
+        createTopic("my_topic", 2, 3,"localhost:9092");
+        createTopic("quadrant-counts", 2, 3,"localhost:9093");
+        createTopic("popular-stations", 2, 3, "localhost:9094");
+
 
         // Keep the program running until interrupted
         Thread.sleep(Long.MAX_VALUE);
@@ -40,9 +42,9 @@ public class KafkaBrokerExample {
         System.out.println("Kafka broker with ID " + brokerId + " started on port " + port);
     }
 
-    private static void createTopic(String topicName, int numPartitions, int replicationFactor) throws ExecutionException, InterruptedException {
+    private static void createTopic(String topicName, int numPartitions, int replicationFactor, String port) throws ExecutionException, InterruptedException {
         Properties adminProperties = new Properties();
-        adminProperties.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        adminProperties.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, port);
 
         try (AdminClient adminClient = AdminClient.create(adminProperties)) {
             NewTopic newTopic = new NewTopic(topicName, numPartitions, (short) replicationFactor);

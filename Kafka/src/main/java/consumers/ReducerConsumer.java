@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 public class ReducerConsumer {
-    private static final String BOOTSTRAP_SERVERS = "localhost:9092";
+    private static final String BOOTSTRAP_SERVERS = "localhost:9093";
     private static final String INPUT_TOPIC = "quadrant-counts";
     private static final String OUTPUT_FILE = "/home/user/kafka/Kafka/quadrant-counts_output2.txt";
     private static Map<String, Integer> quadrantCounts;

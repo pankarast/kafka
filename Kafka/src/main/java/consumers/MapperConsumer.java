@@ -16,21 +16,22 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class MapperConsumer {
-    private static final String BOOTSTRAP_SERVERS = "localhost:9092";
+    private static final String CONSUMER_BOOTSTRAP_SERVERS = "localhost:9092";
+    private static final String PRODUCER_BOOTSTRAP_SERVERS = "localhost:9093";
     private static final String INPUT_TOPIC = "my_topic";
     private static final String OUTPUT_TOPIC = "quadrant-counts";
 
     public static void main(String[] args) {
         // Set up consumer configuration
         Properties consumerProps = new Properties();
-        consumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        consumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, CONSUMER_BOOTSTRAP_SERVERS);
         consumerProps.put(ConsumerConfig.GROUP_ID_CONFIG, "my-consumer-group");
         consumerProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         consumerProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
         // Set up producer configuration
         Properties producerProps = new Properties();
-        producerProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        producerProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, PRODUCER_BOOTSTRAP_SERVERS);
         producerProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         producerProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
