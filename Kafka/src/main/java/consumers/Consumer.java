@@ -11,14 +11,14 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class Consumer {
-    private static final String TOPIC_NAME = "my_topic";
-    private static final String BOOTSTRAP_SERVERS = "localhost:9092"; // Update with your Kafka bootstrap servers
-    private static final int MESSAGE_LIMIT = 675773; // Maximum number of messages to print
+    private static final String TOPIC_NAME = "popular-stations";
+    private static final String BOOTSTRAP_SERVERS = "localhost:9094"; // Update with your Kafka bootstrap servers
+    private static final int MESSAGE_LIMIT = 675774; // Maximum number of messages to print
 
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
-        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "my-consumer-group");
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "popular-stations-mapper");
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
@@ -34,7 +34,7 @@ public class Consumer {
 
                 for (ConsumerRecord<String, String> record : records) {
                     // Print the received message
-                    System.out.println("Received message: " + messageCount);
+                    System.out.println("Key: "+ record.key() + " Value: "+ record.value());
                     messageCount++;
 
                 }

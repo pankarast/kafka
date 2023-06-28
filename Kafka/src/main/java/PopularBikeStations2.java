@@ -13,13 +13,19 @@ import java.util.PriorityQueue;
 
 public class PopularBikeStations2 {
 
-    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/map.png"; // Replace with the path to your map image
-    private static final double MAP_WIDTH = 1247.0;
-    private static final double MAP_HEIGHT = 1252.0;
-    private static final double TOP_LEFT_LATITUDE = 40.921814;
-    private static final double TOP_LEFT_LONGITUDE = -74.262689;
-    private static final double BOTTOM_RIGHT_LATITUDE = 40.495098;
-    private static final double BOTTOM_RIGHT_LONGITUDE = -73.699763;
+    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/map1.png"; // Replace with the path to your map image
+//    private static final double MAP_WIDTH = 1247.0;
+//    private static final double MAP_HEIGHT = 1252.0;
+//    private static final double TOP_LEFT_LATITUDE = 40.921814;
+//    private static final double TOP_LEFT_LONGITUDE = -74.262689;
+//    private static final double BOTTOM_RIGHT_LATITUDE = 40.495098;
+
+    private static final double MAP_WIDTH = 1000.0;
+    private static final double MAP_HEIGHT = 1000.0;
+    private static final double TOP_LEFT_LATITUDE = 40.81334;
+    private static final double TOP_LEFT_LONGITUDE = -74.05160;
+    private static final double BOTTOM_RIGHT_LATITUDE = 40.68456;
+    private static final double BOTTOM_RIGHT_LONGITUDE = -73.88095;
     private static final Color MARKER_COLOR = Color.MAGENTA;
     private static final int MARKER_SIZE = 10;
 
