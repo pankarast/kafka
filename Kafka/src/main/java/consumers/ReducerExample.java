@@ -3,17 +3,39 @@ package consumers;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.serialization.*;
 
+
 import java.time.Duration;
 import java.util.*;
+import java.util.List;
+
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReducerExample {
     private static final String INTERMEDIATE_TOPIC = "popular-stations";
-    private static final int MESSAGE_COUNT = 675774;
+
+    //variables for the image
+    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/map.png"; // Replace with the path to your map image
+    private static final double MAP_WIDTH = 1247.0;
+    private static final double MAP_HEIGHT = 1252.0;
+    private static final double TOP_LEFT_LATITUDE = 40.921814;
+    private static final double TOP_LEFT_LONGITUDE = -74.262689;
+    private static final double BOTTOM_RIGHT_LATITUDE = 40.495098;
+    private static final double BOTTOM_RIGHT_LONGITUDE = -73.699763;
+    private static final Color MARKER_COLOR = Color.MAGENTA;
+    private static final int MARKER_SIZE = 10;
 
     private static class StationInfo {
         private int count;
         private double latitude;
         private double longitude;
+
 
         public StationInfo(int count, double latitude, double longitude) {
             this.count = count;
@@ -105,12 +127,21 @@ public class ReducerExample {
             System.out.println("Interval: " + interval);
 
             int count = 0;
+            BufferedImage mapImage = loadMapImage();
             for (Map.Entry<String, StationInfo> stationEntry : sortedStations) {
                 String station = stationEntry.getKey();
                 StationInfo stationInfo = stationEntry.getValue();
 
                 System.out.println("Station: " + station + ", Count: " + stationInfo.getCount()
                         + ", Latitude: " + stationInfo.getLatitude() + ", Longitude: " + stationInfo.getLongitude());
+
+
+                double latitude = stationInfo.getLatitude();
+                double longitude = stationInfo.getLongitude();
+
+                // Add marker for the station on the map image
+                mapImage = addMarker(mapImage, latitude, longitude);
+
 
                 count++;
                 if (count >= 10) {
@@ -119,8 +150,49 @@ public class ReducerExample {
             }
 
             System.out.println();
+
+            // Save the image for the interval
+            String imagePath = "/home/user/kafka/Kafka/" + interval + ".png";
+
+            saveImage(mapImage, imagePath);
         }
 
         consumer.close();
     }
+
+
+    private static BufferedImage loadMapImage() {
+        try {
+            return ImageIO.read(new File(MAP_IMAGE_PATH));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static BufferedImage addMarker(BufferedImage mapImage, double latitude, double longitude) {
+        double x = (longitude - TOP_LEFT_LONGITUDE) * (MAP_WIDTH / (BOTTOM_RIGHT_LONGITUDE - TOP_LEFT_LONGITUDE));
+        double y = (TOP_LEFT_LATITUDE - latitude) * (MAP_HEIGHT / (TOP_LEFT_LATITUDE - BOTTOM_RIGHT_LATITUDE));
+
+        Graphics2D g2d = mapImage.createGraphics();
+        g2d.setColor(MARKER_COLOR);
+        g2d.fillOval((int) x, (int) y, MARKER_SIZE, MARKER_SIZE);
+        g2d.dispose();
+
+        return mapImage;
+    }
+
+
+    private static void saveImage(BufferedImage image, String filePath) {
+        try {
+            File outputFile = new File(filePath);
+            ImageIO.write(image, "png", outputFile);
+            // For JPEG, use the following line instead:
+            // ImageIO.write(image, "jpeg", outputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
