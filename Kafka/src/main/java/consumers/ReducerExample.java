@@ -21,7 +21,8 @@ public class ReducerExample {
     private static final String INTERMEDIATE_TOPIC = "popular-stations";
 
     //variables for the image
-    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/map.png"; // Replace with the path to your map image
+    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/src/main/resources/map.png"; // Replace with the path to your map image
+
 //    private static final double MAP_WIDTH = 1247.0;
 //    private static final double MAP_HEIGHT = 1252.0;
 //    private static final double TOP_LEFT_LATITUDE = 40.921814;
@@ -159,7 +160,7 @@ public class ReducerExample {
             System.out.println();
 
             // Save the image for the interval
-            String imagePath = "/home/user/kafka/Kafka/" + interval + ".png";
+            String imagePath = "/home/user/kafka/Kafka/src/main/resources/" + interval + ".png";
 
             saveImage(mapImage, imagePath);
         }
