@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class BikeStationsMap {
-    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/map.png"; // Replace with the path to your map image
+    private static final String MAP_IMAGE_PATH = "/home/user/kafka/Kafka/map1.png"; // Replace with the path to your map image
     private static final double MAP_WIDTH = 1247.0;
     private static final double MAP_HEIGHT = 1252.0;
     private static final double TOP_LEFT_LATITUDE = 40.921814;
